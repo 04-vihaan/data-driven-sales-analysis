@@ -1,19 +1,31 @@
-# Olist Brazil E-commerce: Where Late Deliveries Cost Reviews
+# Olist: how late is too late?
 
-### Project Overview
-This project analyzes 98k+ e-commerce orders (R$13.5M in product sales) from the public Olist dataset to determine which states and sellers have systemic delivery problems, and how much those delays impact customer satisfaction and revenue.
+Olist shows customers a promised delivery date at checkout. I wanted to know
+how far past that date an order can slip before it costs us the customer.
 
-### Key Findings (Sep 2016 – Aug 2018)
-* **The Late Penalty:** 6.8% of delivered orders arrived after the promised date. Late orders average a **2.27★** rating versus **4.29★** for on-time orders. 
-* **The Bottom Line:** 54% of late orders result in a 1-star review (compared to only 6.6% for on-time orders), severely damaging seller reputation.
-* **Regional Bottlenecks:** Late rates are highest in AL (21%), MA (17%), SE (15%), and PI (14%).
-* **Retention Reality:** Only ~3% of customers in this dataset ever reorder, indicating that repeat purchase is not a viable growth lever without first solving fulfillment logistics.
+## What I found (96,470 delivered orders, Sep 2016 – Aug 2018)
 
-### Technical Stack & Pipeline
-1. **PostgreSQL 15+:** Used for ETL, data sanitization, handling duplicates, and deriving fulfillment flags.
-2. **Power BI:** Used for the final visualization layer (see `.pbix` file).
+- 6.8% of delivered orders arrived after the promised date.
+- Late orders average 2.27 stars vs 4.29 on time. 54% of late orders get a
+  1-star review, vs 6.6% on time.
+- The damage is not linear. 1–3 days late: 3.29 stars. 4–7 days: 2.10.
+  8+ days: about 1.7, with ~70% leaving 1 star.
+- Cross-state orders (64% of volume) are late 8.1% of the time vs 4.5%
+  within a state.
+- Customers whose first order was late reordered 2.9% of the time vs 4.2%
+  (first orders before Feb 2018, p ≈ 0.001). Small gap, but real.
+- Late orders carry R$0.99M, about 7.5% of delivered sales.
 
-### Data Quality & Assumptions Handled in SQL
-* **Cancellations:** Rather than hard-deleting canceled orders (which orphans their payment and review records), they are retained and flagged via `is_canceled`.
-* **Revenue Definition:** "Net Sales" strictly sums the `price` column, excluding freight and installment interest to avoid reconciliation mismatches.
-* **Geolocations:** Explicitly aggregated by zip code to prevent many-to-one fan-out issues in the data model.
+Highest late rates by customer state: AL 21% (n=397, ±4pp), MA 17%, SE 15%,
+PI 14%. These are associations, not proof that delay causes the low scores.
+
+## Definitions
+- Late: delivered on a later calendar day than promised (timestamps give 8.1%).
+- Reviews: latest review per order; only reviewed orders in score stats.
+- Sales: SUM(price), excludes freight; cancelled orders excluded.
+
+## Run it
+1. Download the dataset from Kaggle (link) into `raw/`.
+2. `psql -f pipeline.sql`
+3. `psql -f analysis/metrics.sql`
+Dashboard: `Brazil_Ecommerce_Analysis.pbix` (screenshot below).
