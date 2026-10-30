@@ -12,7 +12,7 @@ how far past that date an order can slip before it costs us the customer.
   8+ days: about 1.7, with ~70% leaving 1 star.
 - Cross-state orders (64% of volume) are late 8.1% of the time vs 4.5%
   within a state.
-- Customers whose first order was late reordered 2.9% of the time vs 4.2%
+- Customers whose first order was late reordered 2.8% of the time vs 4.1%
   (first orders before Feb 2018, p ≈ 0.001). Small gap, but real.
 - Late orders carry R$0.99M, about 7.5% of delivered sales.
 
@@ -24,8 +24,6 @@ PI 14%. These are associations, not proof that delay causes the low scores.
 - Reviews: latest review per order; only reviewed orders in score stats.
 - Sales: SUM(price), excludes freight; cancelled orders excluded.
 
-## Run it
-1. Download the dataset from Kaggle (link) into `raw/`.
-2. `psql -f pipeline.sql`
-3. `psql -f analysis/metrics.sql`
-Dashboard: `Brazil_Ecommerce_Analysis.pbix` (screenshot below).
+## How to Run
+1. Download the Olist dataset from Kaggle (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) into the `raw/` folder.
+2. Open `delivery_impact_analysis.ipynb` and run all cells.
