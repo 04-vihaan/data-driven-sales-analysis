@@ -48,6 +48,6 @@ WITH delivered AS (
 )
 SELECT ROUND(SUM(i.price)) AS total_delivered_sales,
        ROUND(SUM(CASE WHEN d.is_late THEN i.price ELSE 0 END)) AS late_orders_value,
-       ROUND(100.0 * SUM(CASE WHEN d.is_late THEN i.price ELSE 0 END) / SUM(i.price), 1) AS pct_late_value
+       ROUND(100.0 * SUM(CASE WHEN d.is_late THEN i.price ELSE 0 END) / SUM(i.price)::numeric, 1) AS pct_late_value
 FROM delivered d
 JOIN olist_order_items_dataset i USING (order_id);
