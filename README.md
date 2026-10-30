@@ -16,8 +16,10 @@ how far past that date an order can slip before it costs us the customer.
   (first orders before Feb 2018, p ≈ 0.001). Small gap, but real.
 - Late orders carry R$0.99M, about 7.5% of delivered sales.
 
+
 Highest late rates by customer state: AL 21% (n=397, ±4pp), MA 17%, SE 15%,
 PI 14%. These are associations, not proof that delay causes the low scores.
+![Reviews by days late](severity.png)
 
 ## Definitions
 - Late: delivered on a later calendar day than promised (timestamps give 8.1%).
@@ -27,3 +29,6 @@ PI 14%. These are associations, not proof that delay causes the low scores.
 ## How to Run
 1. Download the Olist dataset from Kaggle (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) into the `raw/` folder.
 2. Open `delivery_impact_analysis.ipynb` and run all cells.
+
+
+
