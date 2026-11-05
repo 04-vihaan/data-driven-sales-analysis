@@ -28,6 +28,13 @@ PI 14%. These are associations, not proof that delay causes the low scores.
 - Cross-state: Calculated using the first seller listed on each order (applicable to 1,278 multi-seller orders).
 - Retention: did_reorder includes repeat purchases from any delivered order in the dataset.
 
+## Power BI Dashboards
+### Delivery Insights & Sales by Month
+![Olist Insights Dashboard](images/olist-insights.jpeg)
+
+### Review Score Distributions
+![Olist Review Scores](images/olist-reviews.jpeg)
+
 
 ## how to run
 1. Download the Olist dataset from Kaggle (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) into `raw/`.
